@@ -29,12 +29,10 @@ steps_by_day <- aggregate(steps ~ date,complete_cases,sum)
 ```{r}
 hist(steps_by_day$steps, main="Total number of steps taken each day",xlab="Steps", ylab="Days")
 ```
-
 3. Calculate and report the mean and median of the total number of steps taken per day
 
 ```{r}
-summarized_data <- complete_cases %>%
-group_by(date) %>%
+summarized_data <- steps_by_day %>%
 summarize(Mean=mean(steps),Median=median(steps[steps>0],na.rm=TRUE)) %>%
 print
 ```
@@ -84,8 +82,7 @@ hist(steps_by_day$steps, main="Total number of steps taken each day (new dataset
 What is the impact of imputing missing data on the estimates of the total daily number of steps?
 
 ```{r}
-complete_summarized_data <- complete_data %>%
-group_by(date) %>%
+complete_summarized_data <- complete_steps_by_day %>%
 summarize(Mean=mean(steps),Median=median(steps[steps>0],na.rm=TRUE)) %>%
 print
 
